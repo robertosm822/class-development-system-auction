@@ -1,6 +1,7 @@
 # Class Development System Auction
 
  - Training on Youtube to develop an online auction system. Full Stack Mode (Severine's).
+ - Link play list in Youtube: [LINK](https://www.youtube.com/playlist?list=PLUWz4iWfYNL0sr-fKZrTIW39hytFZ-cO-)
 
 ## Install development environment with `Docker Desktop`
 
