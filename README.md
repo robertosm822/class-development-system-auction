@@ -24,3 +24,162 @@ Now, finally, we are able to enter, for example, the Docker image that is runnin
 Result:
 ![image](https://user-images.githubusercontent.com/3953157/232830380-b4634d0c-9ae1-41e1-9ebf-ea9fc878c986.png)
 
+## Generating Migrations in Laravel Artisan Commands
+
+```bash
+  php artisan make:migration create_sellers_table
+  php artisan make:migration create_actioneers_table
+  php artisan make:migration create_particiopants_table
+  php artisan make:migration create_addresses_table
+  php artisan make:migration create_annoucements_table
+  php artisan make:migration create_bids_table
+  php artisan make:migration create_history_bids_table
+  php artisan make:migration create_images_table
+```
+
+## Edit Migrations and add fiels in class tables
+
+- users_table
+
+ ```json
+  {
+    "id" : "integer primary key auto-increment",
+    "name" : "string",
+    "email" : "string",
+    "email_verified_at" : "string",
+    "password" : "string",
+    "remember_token" : "string",
+    "user_type_login" : "string",
+    "created_at" :"datetime",
+    "updated_at" : "datetime"
+  }
+ ```
+
+ - sellers_table
+
+ ```json
+  {
+    "id": "integer primary key auto-increment",
+    "full_name": "string",
+    "phone": "string",
+    "user_id": "foreign key",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+ ```
+
+ - actioneers_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "full_name": "string",
+    "phone": "string",
+    "user_id": "foreign key",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+
+ - particiopants_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "full_name": "string",
+    "phone": "string",
+    "user_id": "bigInteger foreign key",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+
+ - addresses_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "user_id" : "bigInteger foreign key",
+    "zip_code" : "string",
+    "street" : "string",
+    "number" : "string",
+    "district" : "string",
+    "city" : "string",
+    "state" : "string",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+
+ - annoucements_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "seller_id": "bigInteger foreign key",
+    "image_id": "bigInteger foreign key",
+    "title": "string",
+    "product_buyer_premium": "string",
+    "product_bid_increment": "string",
+    "product_attribute_condition": "string",
+    "product_attribute_mileage": "string",
+    "product_attribute_year_fabric": "string",
+    "product_attribute_engine": "string",
+    "product_attribute_fuel": "string",
+    "product_attribute_transmission": "string",
+    "product_number_doors": "string",
+    "product_color": "string",
+    "description": "text",
+    "date_expiration" : "string",
+    "status": "string (active | inactive)",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+ 
+ - bids_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "seller_id": "bigInteger foreign key",
+    "announcement_id": "bigInteger foreign key",
+    "price_initial": "double",
+    "price_incremental": "double",
+    "price_now_bid": "double",
+    "time_expiration": "string",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+ 
+ - history_bids_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "seller_id": "bigInteger foreign key",
+    "announcement_id": "bigInteger foreign key",
+    "particiopant_id": "bigInteger foreign key",
+    "price_initial": "double",
+    "price_incremental": "double",
+    "price_now_bid": "double",
+    "time_expiration": "string",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+
+ - images_table
+
+```json
+  {
+    "id": "integer primary key auto-increment",
+    "announcement_id": "bigInteger foreign key",
+    "name_archive": "string",
+    "url_archive": "string",
+    "created_at" : "string",
+    "updated_at" : "string"
+  }
+```
+
