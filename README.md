@@ -182,21 +182,21 @@ Result:
   }
 ```
 
-## Criando a estrutura do Front-End do Sistema
+## Creating the System Front-End structure
 
-Com base no template HTML5 já adaptado podemos iniciar a contrução estática da tela inicial do sistema ou Home.
+Based on the already adapted HTML5 template, we can start the static construction of the system's initial screen or Home.
 
-Para isso vamos precisar primeiro de um `app\Http\Controller` responsável para exibir o conteúdo desta página inicial.  Isso será feito através de um comando do `Laravel 9 Artisan`:
+For this we will first need an `app\Http\Controller` responsible for displaying the contents of this home page. This will be done through a command from the `Laravel 9 Artisan`:
 
 ```bash
   php artisan make:controller FrontEndController -r
 ```
 
-Esse parâmetro -r vai criar os recursos de métodos iniciais de CRUD (Criar, Inserir, Atualizar e Apagar) padrão de todo sistema, mesmo que não venhamos a precisar disso.  Mas, caso não seja utilizado seria uma boa prática apagar os métodos que não estão sendo utilizados.
+This -r parameter will create the default CRUD (Create, Insert, Update, Delete) initial method resources throughout the system, even if we don't need them. But, if not used, it would be a good practice to delete methods that are not being used.
 
-Tenho criado o _Controller_ para controlar essas _views_ vamos na pasta `resources/views/` e precisamos criar a pasta de componentes de nome `/components/`.  Dentro desta nova pasta vamos criar o arquivo `resources/views/components/layout-front.blade.php` e inserir o _HTML5_ do _template_ já criado e adaptado.
+I have created the _Controller_ to control these _views_ let's go in the folder `resources/views/` and we need to create the component folder named `/components/`. Inside this new folder we will create the file `resources/views/components/layout-front.blade.php` and insert the _HTML5_ of the _template_ already created and adapted.
 
-Dentro da pasta `resources/views/` vamos criar uma nova pasta de nome `frontend` onde colocaremos tudo o que vai ser exibido publicamente no site institucional do sistema.  Dentro desta pasta `resources/views/frontend` vamos criar nosso primeiro arquivo de template engine Blade, de nome `home.blade.php`
+Inside the `resources/views/` folder, we will create a new folder named `frontend` where we will place everything that will be publicly displayed on the institutional website of the system. Inside this `resources/views/frontend` folder we will create our first Blade template engine file, named `home.blade.php`
 
 
 
