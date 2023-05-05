@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BackEndController;
+use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/',[FrontEndController::class,'index']);
+
+Route::get('/admin',[ BackEndController::class,'index']);
