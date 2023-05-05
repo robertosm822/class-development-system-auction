@@ -117,6 +117,10 @@ Result:
   {
     "id": "integer primary key auto-increment",
     "seller_id": "bigInteger foreign key",
+<<<<<<< HEAD
+=======
+    "image_id": "bigInteger foreign key",
+>>>>>>> 102263bb7b811625a33b3ac7a4d662733e399bba
     "title": "string",
     "product_buyer_premium": "string",
     "product_bid_increment": "string",
@@ -182,6 +186,7 @@ Result:
   }
 ```
 
+<<<<<<< HEAD
 ## Criando a estrutura do Front-End do Sistema
 
 Com base no template HTML5 já adaptado podemos iniciar a contrução estática da tela inicial do sistema ou Home.
@@ -200,3 +205,5 @@ Dentro da pasta `resources/views/` vamos criar uma nova pasta de nome `frontend`
 
 
 
+=======
+>>>>>>> 102263bb7b811625a33b3ac7a4d662733e399bba
