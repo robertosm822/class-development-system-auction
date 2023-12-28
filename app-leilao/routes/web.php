@@ -21,4 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontEndController::class,'index']);
 
-Route::get('/admin',[ BackEndController::class,'index']);
+Route::get('/admin',[ BackEndController::class,'index'])->middleware('auth')->name('admin');
+
+Auth::routes();
+

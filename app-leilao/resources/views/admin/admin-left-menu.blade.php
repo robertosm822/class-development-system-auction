@@ -9,7 +9,7 @@
                 <input type="file" id="profile-pic" class="d-none">
             </div>
             <div class="content">
-                <h5 class="title"><a href="#0">Pessoa Exemplo</a></h5>
+                <h5 class="title"><a href="#0">{{ Auth::user()->name; }}</a></h5>
                 <span class="username"><a href="#mudar-plano" class="__cf_email__">[PERFIL ANUNCIANTE]</a></span>
             </div>
         </div>
