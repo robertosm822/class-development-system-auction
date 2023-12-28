@@ -1,6 +1,6 @@
 <x-layout-front title="Início">
     
-    @include('frontend.header')
+    @include('components.header')
     
     <!--============= Account Section Starts Here =============-->
     <section class="account-section padding-bottom">

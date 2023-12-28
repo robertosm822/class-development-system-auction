@@ -25,4 +25,3 @@ Route::get('/admin',[ BackEndController::class,'index'])->middleware('auth')->na
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth')->name('home');

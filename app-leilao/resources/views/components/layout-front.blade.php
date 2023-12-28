@@ -67,15 +67,14 @@
                         <ul class="cart-button-area">
 
                             <li>
+                                
                                 <a title="Sair" href="{{ route('logout') }}"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="user-button"><i class="flaticon-user"></i> </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                <span style="color: #fff !important; font-weight: 700;">
-                                Olá {{ Auth::user()->name; }}
-                                </span>
+                        
                             </li>
                         </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     @endif
                 </div>
             </div>
@@ -105,7 +104,7 @@
                                             <a href="#/registrar-se.php">Sign Up</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('login') }}>Sign In</a>
+                                            <a href="#/entrar.php">Sign In</a>
                                         </li>
                                     </ul>
                                 </li>
