@@ -56,12 +56,27 @@
                         </li>
                         -->
                     </ul>
-                    <ul class="cart-button-area">
+                    @guest
+                        <ul class="cart-button-area">
 
-                        <li>
-                            <a href="entrar.php" class="user-button"><i class="flaticon-user"></i></a>
-                        </li>
-                    </ul>
+                            <li>
+                                <a title="Entrar" href="{{ route('login') }}"  class="user-button"><i class="flaticon-user"></i> </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="cart-button-area">
+
+                            <li>
+                                <a title="Sair" href="{{ route('logout') }}"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="user-button"><i class="flaticon-user"></i> </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                <span style="color: #fff !important; font-weight: 700;">
+                                Olá {{ Auth::user()->name; }}
+                                </span>
+                            </li>
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>
@@ -90,7 +105,7 @@
                                             <a href="#/registrar-se.php">Sign Up</a>
                                         </li>
                                         <li>
-                                            <a href="#/entrar.php">Sign In</a>
+                                            <a href="{{ route('login') }}>Sign In</a>
                                         </li>
                                     </ul>
                                 </li>
