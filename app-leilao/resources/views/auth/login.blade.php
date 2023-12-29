@@ -1,4 +1,4 @@
-<x-layout-front title="Início">
+<x-layout-front title="Logar-se">
     
     @include('components.header')
     
