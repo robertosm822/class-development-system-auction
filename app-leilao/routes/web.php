@@ -21,4 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[FrontEndController::class,'index']);
 
-Route::get('/admin',[ BackEndController::class,'index']);
+Route::get('/registrar-se', [FrontEndController::class, 'create'])->name('registrar-se');
+Route::post('/register-user',[FrontEndController::class, 'storeUser'])->name('register-user');
+
+Route::get('/admin',[ BackEndController::class,'index'])->middleware('auth')->name('admin');
+
+Auth::routes();
+

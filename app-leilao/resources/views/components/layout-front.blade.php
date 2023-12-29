@@ -56,12 +56,26 @@
                         </li>
                         -->
                     </ul>
-                    <ul class="cart-button-area">
+                    @guest
+                        <ul class="cart-button-area">
 
-                        <li>
-                            <a href="entrar.php" class="user-button"><i class="flaticon-user"></i></a>
-                        </li>
-                    </ul>
+                            <li>
+                                <a title="Entrar" href="{{ route('login') }}"  class="user-button"><i class="flaticon-user"></i> </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="cart-button-area">
+
+                            <li>
+                                
+                                <a title="Sair" href="{{ route('logout') }}"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="user-button"><i class="flaticon-user"></i> </a>
+                        
+                            </li>
+                        </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

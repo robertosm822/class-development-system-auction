@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormDataRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FrontEndController extends Controller
 {
@@ -23,7 +25,25 @@ class FrontEndController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.registrar-se');
+    }
+
+    /**
+     * Store a new user created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeUser(FormDataRequest $request)
+    {
+        
+
+        //$data['password'] = bcrypt($data['password']);
+
+        //User::create($data);
+        
+        return back()->with('success', 'User created successfully. ');
+        
     }
 
     /**
