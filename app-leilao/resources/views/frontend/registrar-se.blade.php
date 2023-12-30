@@ -75,7 +75,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li>
-                    <a href="./index.php">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
                     <a href="#0">Pages</a>
@@ -98,6 +98,7 @@
                     <div class="section-header">
                         <h2 class="title">INSCREVER-SE</h2>
                         <p>Estamos felizes por você estar aqui!</p>
+                        <div id="error-cep"></div>
                         @if(Session::has('success'))
                             <div class="alert alert-success">
                                 {{ Session::get('success') }}
@@ -115,6 +116,11 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
+                            </div>
+                        @endif
+                        @if(Session::get('errorCad') )
+                            <div class="alert alert-danger">
+                                {{ Session::get('errorCad') }}
                             </div>
                         @endif
                     </div>
@@ -151,31 +157,52 @@
                         </div>
                         <div class="form-group mb-30">
                             <label for="telefone"><i class="fa fa-phone" aria-hidden="true"></i></label>
-                            <input type="text" id="telefone" placeholder="Telefone / Celular">
+                            <input type="text" id="telefone" name="phone" placeholder="Telefone / Celular">
+                            @if ($errors->has('phone'))
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="cep"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="cep" placeholder="CEP">
+                            <input type="text" id="zip_code" name="zip_code" placeholder="CEP">
+                            @if ($errors->has('zip_code'))
+                                <span class="text-danger">{{ $errors->first('zip_code') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="logradouro"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="logradouro" placeholder="Endereço">
+                            <input type="text" id="street" name="street" placeholder="Endereço">
+                            @if ($errors->has('street'))
+                                <span class="text-danger">{{ $errors->first('street') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="Numero"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="numero" placeholder="Número">
+                            <input type="text" id="number" name="number" placeholder="Número">
+                            @if ($errors->has('number'))
+                                <span class="text-danger">{{ $errors->first('number') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="bairro"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="bairro" placeholder="Bairro">
+                            <input type="text" id="district" name="district" placeholder="Bairro">
+                            @if ($errors->has('district'))
+                                <span class="text-danger">{{ $errors->first('district') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="cidade"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="cidade" placeholder="Cidade">
+                            <input type="text" id="city" name="city" placeholder="Cidade">
+                            @if ($errors->has('city'))
+                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="estado"><i class="fa fa-map-marker" aria-hidden="true"></i></label>
-                            <input type="text" id="estado" placeholder="Estado">
+                            <input type="text" id="state" name="state" placeholder="Estado">
+                            @if ($errors->has('state'))
+                                <span class="text-danger">{{ $errors->first('state') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-30">
                             <label for="login-pass"><i class="fas fa-lock"></i></label>
@@ -192,9 +219,12 @@
                         </div>
                         <div class="form-group checkgroup mb-30">
                             <input type="checkbox" name="terms" id="check"><label for="check">Aceito os termos e política de privacidade do site.</label>
+                            @if ($errors->has('terms'))
+                                <span style="margin-top: 45px;" class="text-danger">{{ $errors->first('terms') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-0">
-                            <button type="submit" class="custom-button">LOG IN</button>
+                            <button type="submit" class="custom-button">REGISTRAR</button>
                         </div>
                     </form>
                 </div>
@@ -202,7 +232,7 @@
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">JÁ TEM UMA CONTA?</h3>
                         <p>Faça o login e vá para o seu Painel.</p>
-                        <a href="entrar.php" class="custom-button transparent">Login</a>
+                        <a href="{{ route('login')}}" class="custom-button transparent">Login</a>
                     </div>
                 </div>
             </div>
@@ -229,10 +259,46 @@
             } 
             
         }
+        function limpa_formulario_cep(){
+            $('input[name="street"]').val('');
+            $('input[name="city"]').val('');
+            $('input[name="district"]').val('');
+            $('input[name="state"]').val('');
+        }
         //definir cadastro default
         setTimeout(() => {
             selecionarParticipante('participante-cad');
+            //consulta cep
+            $('input[name="zip_code"]').blur(function(){
+                const cep = $(this).val().replace(/\D/g, '');
+                
+                if($(this).val() != ""){
+    
+                    $('input[name="street"]').val('...');
+                    $('input[name="city"]').val('...');
+                    $('input[name="district"]').val('...');
+                    $('input[name="state"]').val('...');
+
+                    $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+     
+                        $('input[name="street"]').val(dados.logradouro);
+                        $('input[name="district"]').val(dados.bairro);
+                        $('input[name="city"]').val(dados.localidade);
+                        $('input[name="state"]').val(dados.uf);
+                        $('#error-cep').html('');
+                        if(dados.erro){
+                            $('#error-cep').html('<div class="alert alert-danger">CEP não encontrado.</div>');
+                        }
+                    }).fail(function() { 
+                        //cep nao encontrado
+                        limpa_formulario_cep(); 
+                        $('#error-cep').html('<div class="alert alert-danger">CEP não encontrado.</div>');
+                    })
+                }
+            });
         }, 1000);
+
+        
         
     </script>
 </x-layout-front>
