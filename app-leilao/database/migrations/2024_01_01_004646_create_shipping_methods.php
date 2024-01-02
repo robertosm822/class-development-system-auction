@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sellers', function (Blueprint $table) {
+        Schema::create('shipping_methods', function (Blueprint $table) {
             $table->id();
-            $table->unsigned("user_id");
-            $table->string("full_name", 80);
-            $table->string("phone", 50);
+            $table->string('delivery_methods', 250);
+            $table->string('delivery_cost', 20)->default('0,00');
+            $table->string('delivery_time', 20)->default('15');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::dropIfExists('shipping_methods');
     }
 };

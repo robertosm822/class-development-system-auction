@@ -18,7 +18,7 @@
                 <a href="{{url('/admin')}}" class="active"><i class="flaticon-dashboard"></i>Dashboard</a>
             </li>
             <li>
-                <a href="./profile.php"><i class="flaticon-settings"></i>Perfil Pessoal </a>
+                <a href="{{url('/admin/perfil')}}"><i class="flaticon-settings"></i>Perfil Pessoal </a>
             </li>
             <li>
                 <a href="admin-meus-lances.php"><i class="flaticon-auction"></i>Meus Lances</a>
