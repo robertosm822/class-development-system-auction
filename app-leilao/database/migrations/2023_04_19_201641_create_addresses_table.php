@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string("city", 80);
             $table->string("state", 20);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
