@@ -10,7 +10,16 @@
             </div>
             <div class="content">
                 <h5 class="title"><a href="#0">{{ Auth::user()->name; }}</a></h5>
-                <span class="username"><a href="#mudar-plano" class="__cf_email__">[PERFIL ANUNCIANTE]</a></span>
+                <span class="username">
+                    <a href="#mudar-plano" class="__cf_email__">
+                        
+                        @if(Auth::user()->user_type_login === 'anunciante')
+                            [PERFIL ANUNCIANTE]
+                        @else 
+                            [PERFIL PARTICIPANTE]
+                        @endif
+                    </a>
+                </span>
             </div>
         </div>
         <ul class="dashboard-menu">
@@ -19,6 +28,12 @@
             </li>
             <li>
                 <a href="{{url('/admin/perfil')}}"><i class="flaticon-settings"></i>Perfil Pessoal </a>
+            </li>
+            <li>
+                <a href="#products">
+                    <img src="{{url('/assets/images/logo/box-open.png')}}" alt="" style="padding-right: 4px; width: 19px;">
+                    Produtos Cadastrados
+                </a>
             </li>
             <li>
                 <a href="admin-meus-lances.php"><i class="flaticon-auction"></i>Meus Lances</a>

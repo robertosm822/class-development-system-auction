@@ -196,7 +196,7 @@
                             <div class="dash-pro-item mb-30 dashboard-widget">
                                 <div class="header">
                                     <h4 class="title">Telefone</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Editar</span>
+                                    <span class="edit"><i class="flaticon-edit" data-toggle="modal" data-target="#modalPersonalPhone"></i> Editar</span>
                                 </div>
                                 <ul class="dash-pro-body">
                                     <li>
@@ -284,6 +284,69 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- modalPersonalPhone -->
+<div id="modalPersonalPhone" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title">Editar Telefone</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+        </div>
+        <div class="modal-body">
+            @if(Session::get('success') )
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if(Auth::user()->user_type_login === 'anunciante')
+                <form class="form-horizontal" method="post" action="{{route('update-phone', $seller['id'])}}">
+                    @csrf    
+                    <div class="form-group mb-30">
+                        <label for="Endereco">Digite um número de telefone:</label>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label for="phone"></label>
+                        <input type="hidden" name="id" value="">
+                        <input type="text" id="phone" name="phone" value="{{$seller['phone']}}" placeholder="Número" required>
+                    </div>
+                    
+                    <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">ATUALIZAR</button>
+                        </div>
+                    </div>
+                </form>
+            @else 
+                <form class="form-horizontal" method="post" action="{{route('update-phone', $actor['id'])}}">
+                    @csrf    
+                    <div class="form-group mb-30">
+                        <label for="Endereco">Digite um número de telefone:</label>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label for="phone"></label>
+                        <input type="hidden" name="id" value="">
+                        <input type="text" id="phone" name="phone" value="{{$actor['phone']}}" placeholder="Número" required>
+                    </div>
+                    
+                    <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">ATUALIZAR</button>
+                        </div>
+                    </div>
+                </form>
+            @endif
         </div>
         <div class="modal-footer">
             

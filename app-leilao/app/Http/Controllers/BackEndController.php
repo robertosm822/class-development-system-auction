@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Actor;
 use App\Models\Address;
 use App\Models\Seller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BackEndController extends Controller
 {
@@ -60,6 +62,37 @@ class BackEndController extends Controller
             return redirect('admin/perfil')->with('errorUpdate',$errorUpdate);
         }
         
+    }
+
+    public function updatePhone(Request $request, $id)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data = $request->all();
+            
+            
+            if(Auth::user()->user_type_login === 'participante'){
+                DB::table('actioneers')->update(
+                    ['phone' => $data['phone'] ],
+                    ['id' => $id]
+                );
+            }elseif (Auth::user()->user_type_login === 'anunciante'){
+                DB::table('sellers')->update(
+                    ['phone' => $data['phone'] ],
+                    ['id' => $id]
+                );
+            }
+            DB::commit();
+            $success = 'Atualizado telefone com sucesso!';
+            return redirect('admin/perfil')->with('success',$success);
+
+        } catch (Exception $e) {
+            DB::rollback();
+            $errorCad = 'Ops. Algo deu errado em seu cadastro, tente novamente ou contate o suporte. '.$e->getMessage();
+            dd($errorCad);
+            return redirect('admin/perfil')->with('errorCad',$errorCad);
+        }
     }
 
     /**
