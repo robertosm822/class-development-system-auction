@@ -90,7 +90,27 @@ class BackEndController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             $errorCad = 'Ops. Algo deu errado em seu cadastro, tente novamente ou contate o suporte. '.$e->getMessage();
-            dd($errorCad);
+            return redirect('admin/perfil')->with('errorCad',$errorCad);
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $data = $request->all();
+            DB::table('users')->update(
+                ['password' => bcrypt($data['password'])],
+                ['id' => Auth::user()->id]
+            );
+
+            DB::commit();
+            $success = 'Atualizada senha com sucesso!';
+            return redirect('admin/perfil')->with('success',$success);
+        } catch (Exception $e) {
+            DB::rollback();
+            $errorCad = 'Ops. Algo deu errado em seu cadastro, tente novamente ou contate o suporte. '.$e->getMessage();
             return redirect('admin/perfil')->with('errorCad',$errorCad);
         }
     }

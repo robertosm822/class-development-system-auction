@@ -31,6 +31,8 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function
     Route::post('/update-address', [BackEndController::class, 'profileUpdateAddress'])->name('updateAddress');
 
     Route::post('/update-phone/{id}', [BackEndController::class, 'updatePhone'])->name('update-phone');
+
+    Route::put('/update-password', [BackEndController::class, 'updatePassword'])->name('update-password');
 });
 
 Auth::routes();

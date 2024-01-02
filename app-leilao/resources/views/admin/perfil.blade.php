@@ -136,6 +136,10 @@
                                         <div class="info-name">Nome</div>
                                         <div class="info-value">{{ Auth::user()->name}}</div>
                                     </li>
+                                    <li>
+                                        <div class="info-name">E-mail</div>
+                                        <div class="info-value">{{ Auth::user()->email}}</div>
+                                    </li>
                                     <!--
                                     <li>
                                         <div class="info-name">Date of Birth</div>
@@ -212,12 +216,12 @@
                         <div class="col-12">
                             <div class="dash-pro-item dashboard-widget">
                                 <div class="header">
-                                    <h4 class="title">Security</h4>
-                                    <span class="edit"><i class="flaticon-edit"></i> Editar</span>
+                                    <h4 class="title">Segurança</h4>
+                                    <span class="edit"><i class="flaticon-edit" data-toggle="modal" data-target="#modalPersonalPassword"></i> Editar</span>
                                 </div>
                                 <ul class="dash-pro-body">
                                     <li>
-                                        <div class="info-name">Password</div>
+                                        <div class="info-name">Senha</div>
                                         <div class="info-value">xxxxxxxxxxxxxxxx</div>
                                     </li>
                                 </ul>
@@ -347,6 +351,51 @@
                     </div>
                 </form>
             @endif
+        </div>
+        <div class="modal-footer">
+            
+        </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- modalPersonalPassword -->
+<div id="modalPersonalPassword" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <h4 class="modal-title">Editar Senha</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            
+        </div>
+        <div class="modal-body">
+            @if(Session::get('success') )
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+           
+            <form class="form-horizontal" method="post" action="{{ route('update-password')}}">
+                @csrf    
+                <div class="form-group mb-30">
+                    <label for="Endereco">Senha:</label>
+                </div>
+                <div class="form-group mb-30">
+                    <label for="password"></label>
+                    {{ method_field('PUT') }}
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-group">        
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success">ATUALIZAR</button>
+                    </div>
+                </div>
+            </form>
+            
         </div>
         <div class="modal-footer">
             
