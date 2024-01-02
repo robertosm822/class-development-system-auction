@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('actioneers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
+            $table->unsigned("user_id");
             $table->string("full_name", 80);
             $table->string("phone", 50);
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

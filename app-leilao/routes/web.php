@@ -24,7 +24,14 @@ Route::get('/',[FrontEndController::class,'index']);
 Route::get('/registrar-se', [FrontEndController::class, 'create'])->name('registrar-se');
 Route::post('/register-user',[FrontEndController::class, 'storeUser'])->name('register-user');
 
-Route::get('/admin',[ BackEndController::class,'index'])->middleware('auth')->name('admin');
+Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function () { 
+    
+    Route::get('/',[ BackEndController::class,'index'])->name('admin');
+    Route::get('/perfil',[ BackEndController::class,'profile'])->name('perfil');
+    Route::post('/update-address', [BackEndController::class, 'profileUpdateAddress'])->name('updateAddress');
+
+    Route::post('/update-phone/{id}', [BackEndController::class, 'updatePhone'])->name('update-phone');
+});
 
 Auth::routes();
 
