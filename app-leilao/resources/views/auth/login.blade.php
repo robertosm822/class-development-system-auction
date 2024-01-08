@@ -66,7 +66,7 @@
                     <div class="section-header mb-0">
                         <h3 class="title mt-0">NOVO AQUI?</h3>
                         <p>Cadastre-se e crie sua conta</p>
-                        <a href="registrar-se.php" class="custom-button transparent">INSCREVER-SE</a>
+                        <a href="{{route('registrar-se')}}" class="custom-button transparent">INSCREVER-SE</a>
                     </div>
                 </div>
             </div>

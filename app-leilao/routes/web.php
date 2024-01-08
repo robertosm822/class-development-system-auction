@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AnnoucementsController;
 use App\Http\Controllers\BackEndController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +26,20 @@ Route::get('/',[FrontEndController::class,'index']);
 Route::get('/registrar-se', [FrontEndController::class, 'create'])->name('registrar-se');
 Route::post('/register-user',[FrontEndController::class, 'storeUser'])->name('register-user');
 
-Route::get('/admin',[ BackEndController::class,'index'])->middleware('auth')->name('admin');
+Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function () { 
+    
+    Route::get('/',[ BackEndController::class,'index'])->name('admin');
+    Route::get('/perfil',[ BackEndController::class,'profile'])->name('perfil');
+    Route::post('/update-address', [BackEndController::class, 'profileUpdateAddress'])->name('updateAddress');
+    Route::post('/update-phone/{id}', [BackEndController::class, 'updatePhone'])->name('update-phone');
+    Route::put('/update-password', [BackEndController::class, 'updatePassword'])->name('update-password');
+
+    /**
+     * Cadastro de produtos
+    */
+    Route::get('/cadastrar-produto', [AnnoucementsController::class, 'create'])->name('cadastrar-produto');
+    Route::post('/upload-files', [ImagesController::class, 'store'])->name('upload.files');
+});
 
 Auth::routes();
 

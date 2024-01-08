@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double("price_now_bid", 12, 2)->default(0);
             $table->string("time_expiration");
             $table->timestamps();
-            $table->foreign('seller_id')->references('id')->on('sellers');
+            $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
             $table->foreign('announcement_id')->references('id')->on('annoucements');
             $table->foreign('particiopant_id')->references('id')->on('particiopants');
         });

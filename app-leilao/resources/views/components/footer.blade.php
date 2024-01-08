@@ -32,7 +32,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/01.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/01.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -76,7 +76,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/03.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/03.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -119,7 +119,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/04.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/04.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -162,7 +162,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/05.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/05.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -205,7 +205,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/06.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/06.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -248,7 +248,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/07.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/07.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -291,7 +291,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/08.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/08.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
@@ -334,7 +334,7 @@
             <div class="col-sm-10 col-md-6 col-lg-4">
                 <div class="auction-item-2">
                     <div class="auction-thumb">
-                        <a href="./product-details.php"><img src="./assets/images/auction/product/09.png" alt="product"></a>
+                        <a href="./product-details.php"><img src="{{asset('assets/images/auction/product/09.png')}}" alt="product"></a>
                         <a href="#0" class="rating"><i class="far fa-star"></i></a>
                         <a href="#0" class="bid"><i class="flaticon-auction"></i></a>
                     </div>
