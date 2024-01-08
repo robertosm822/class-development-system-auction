@@ -36,6 +36,13 @@
                 </a>
             </li>
             <li>
+            
+                <a href="{{url('admin/cadastrar-produto')}}">
+                    <img src="{{url('/assets/images/logo/box-open.png')}}" alt="" style="padding-right: 4px; width: 19px;">
+                    Cadastrar Produto
+                </a>
+            </li>
+            <li>
                 <a href="admin-meus-lances.php"><i class="flaticon-auction"></i>Meus Lances</a>
             </li>
             <li>

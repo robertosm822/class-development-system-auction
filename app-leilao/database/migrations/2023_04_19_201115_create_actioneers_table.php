@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('actioneers', function (Blueprint $table) {
             $table->id();
-            $table->unsigned("user_id");
+            $table->unsignedBigInteger("user_id");
             $table->string("full_name", 80);
             $table->string("phone", 50);
             $table->timestamps();

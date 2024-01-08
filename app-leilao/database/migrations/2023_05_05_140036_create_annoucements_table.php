@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string("product_color")->nullable();
             $table->string("define_favorite")->default('0');
             $table->text("description");
-            $table->date("date_expiration");
+            $table->dateTime("date_started")->default(date('Y-m-d H:i:s'));
+            $table->dateTime("date_expiration");
             $table->string("status")->default('active'); //"string (active | inactive)",
             $table->timestamps();
             $table->foreign('seller_id')->references('id')->on('sellers')->onDelete('cascade');
