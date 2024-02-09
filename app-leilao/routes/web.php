@@ -5,6 +5,7 @@ use App\Http\Controllers\BackEndController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function
      * Cadastro de produtos
     */
     Route::get('/cadastrar-produto', [AnnoucementsController::class, 'create'])->name('cadastrar-produto');
+    Route::get('/list-products', [AnnoucementsController::class, 'addForm'])->name('list.products');
     Route::post('/upload-files', [ImagesController::class, 'store'])->name('upload.files');
 });
 

@@ -8755,3 +8755,26 @@ button.custom-button {
 }
 
 /*All Animation Ends Here*/
+
+/**
+ Tela de Listar Produtos Anunciados
+*/
+.space-table-left {
+    padding-left: 10px !important;
+    border-left: 1px solid silver;
+    padding-right: 10px !important;
+}
+.space-table-top {
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+}
+
+.small{
+    width: 25px !important;
+}
+.small-red {
+    color: #e73351 !important;
+}
+.small-blue {
+    color: #007ec3 !important;
+}

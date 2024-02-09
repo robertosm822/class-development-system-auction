@@ -30,7 +30,7 @@
                 <a href="{{url('/admin/perfil')}}"><i class="flaticon-settings"></i>Perfil Pessoal </a>
             </li>
             <li>
-                <a href="#products">
+                <a href="{{ url('/admin/list-products')}}">
                     <img src="{{url('/assets/images/logo/box-open.png')}}" alt="" style="padding-right: 4px; width: 19px;">
                     Produtos Cadastrados
                 </a>

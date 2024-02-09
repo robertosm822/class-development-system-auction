@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Annoucement;
 use App\Models\Category;
 use App\Models\Seller;
 use Illuminate\Http\Request;
@@ -43,6 +44,12 @@ class AnnoucementsController extends Controller
         //pegar o seller_id relacionado ao user online
         $seller_id = Seller::where('user_id', '=', Auth::user()->first);
         $seller_id = $seller_id->id;
+    }
+
+    public function addForm()
+    {
+        $products = Annoucement::all();
+        return view('admin.produtos-gerenciar', compact('products'));
     }
 
     /**

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
