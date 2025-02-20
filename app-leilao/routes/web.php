@@ -27,8 +27,8 @@ Route::get('/',[FrontEndController::class,'index']);
 Route::get('/registrar-se', [FrontEndController::class, 'create'])->name('registrar-se');
 Route::post('/register-user',[FrontEndController::class, 'storeUser'])->name('register-user');
 
-Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function () { 
-    
+Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function () {
+
     Route::get('/',[ BackEndController::class,'index'])->name('admin');
     Route::get('/perfil',[ BackEndController::class,'profile'])->name('perfil');
     Route::post('/update-address', [BackEndController::class, 'profileUpdateAddress'])->name('updateAddress');
@@ -41,6 +41,16 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function
     Route::get('/cadastrar-produto', [AnnoucementsController::class, 'create'])->name('cadastrar-produto');
     Route::get('/list-products', [AnnoucementsController::class, 'addForm'])->name('list.products');
     Route::post('/upload-files', [ImagesController::class, 'store'])->name('upload.files');
+
+    //Update de Anuncios
+    Route::get('/announcements/{id}/edit', [AnnoucementsController::class, 'edit'])->name('announcements.edit');
+    Route::put('/announcements/{id}', [AnnoucementsController::class, 'update'])->name('announcements.update');
+    //delete de anuncios
+    Route::delete('/announcements/{id}', [AnnoucementsController::class,'destroy'])->name('announcements.destroy');
+
+    //deletar imagem pelo Modal em Editar
+    Route::delete('/images/{id}', [ImagesController::class, 'destroy'])->name('images.destroy');
+
 });
 
 Auth::routes();

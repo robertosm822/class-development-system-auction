@@ -131,11 +131,11 @@
                                     {{ Session::get('errorUpdate') }}
                                 </div>
                             @endif
-                            
-                                
+
+
                             <div class="dash-pro-item mb-30 dashboard-widget">
                                 <div class="header">
-                                    
+
                                     <h4 class="title">Cadastrar Imagens:</h4>
                                     <!-- <span class="edit"><i data-toggle="modal" data-target="#modalPersonalDetails" class="flaticon-edit"></i> Editar</span> -->
                                 </div>
@@ -155,12 +155,12 @@
                                             <div class="filenames"></div>
                                         </div>
                                     </li>
-                                    
-                                    
+
+
                                 </ul>
                             </div>
 
-                            
+
                         </div>
                         <form action="{{route('upload.files')}}" method="post" enctype="multipart/form-data" style="width: 100%;" id="formAnnoucement">
                             @csrf
@@ -204,6 +204,7 @@
                                                 <textarea class="form-control" name="description" id="description" cols="30" rows="10"></textarea>
                                             </div>
                                         </li>
+
                                         <li>
                                             <div class="info-name">Preço Inicial</div>
                                             <div class="info-value">
@@ -219,13 +220,32 @@
                                         <li>
                                             <div class="info-name">Inicia em</div>
                                             <div class="info-value">
-                                                <input type="text" name="date_started" id="date_started" placeholder="dd/mm/YYYY" required>
+                                                <input type="datetime-local" name="date_started" id="date_started" placeholder="dd/mm/YYYY" required>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="info-name">Expira em</div>
                                             <div class="info-value">
-                                                <input type="text" name="date_expiration" id="date_expiration" placeholder="dd/mm/YYYY" required>
+                                                <input type="datetime-local" name="date_expiration" id="date_expiration" placeholder="dd/mm/YYYY" required>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="form-group" style="width: 100%;">
+                                                <label>Atributos do Produto</label>
+                                                <div id="attributes-container">
+
+                                                        <div class="attribute-row">
+                                                            <input type="text" name="attributes[${index}][name]" class="form-control input-attributes-add" placeholder="Nome do atributo" required>
+                    <input type="text" name="attributes[${index}][value]" class="form-control input-attributes-add" placeholder="Valor do atributo" required>
+                    <button type="button" class="btn-attributes btn btn-danger remove-attribute"><i class="small material-icons small-white">delete_chart</i> <div class="txt-excluir-attr">Excluir</div></button>
+                                                        </div>
+
+                                                </div>
+                                                <button type="button" class="btn btn-success btn-attributes-add" id="add-attribute">
+
+                                                    <div class="add-icon-circle"><i class="small material-icons small-white">add_circle</i></div>
+                                                    <div>Adicionar Novo Atributo</div>
+                                                </button>
                                             </div>
                                         </li>
                                         <li>
@@ -238,9 +258,9 @@
                                             </div>
                                         </li>
                                         <li>
-                                           
+
                                                 <button class="btn-info" style="margin-top: 20px;">CADASTRAR</button>
-                                            
+
                                         </li>
                                     </ul>
                                 </div>
@@ -268,7 +288,7 @@ setTimeout(() => {
         }
     });
 }, 1000);
- 
-    
+
+
 </script>
 </x-layout-front>

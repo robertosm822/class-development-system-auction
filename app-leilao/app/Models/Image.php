@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Image extends Model
 {
@@ -15,8 +16,9 @@ class Image extends Model
         'url_archive'
     ];
 
-    public function annoucements()
-    {
-        return $this->belongsTo(Annoucement::class);
-    }
+     // Relacionamento correto com Announcement
+     public function announcement(): BelongsTo
+     {
+         return $this->belongsTo(Annoucement::class, 'announcement_id', 'id');
+     }
 }

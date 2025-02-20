@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Annoucement extends Model
 {
@@ -33,5 +34,15 @@ class Annoucement extends Model
     public function categories()
     {
         return $this->hasMany(Category::class, 'id','category_id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class, 'announcement_id', 'id');
+    }
+
+    public function attributes()
+    {
+        return $this->hasMany(AnnouncementAttribute::class,'announcement_id', 'id' );
     }
 }

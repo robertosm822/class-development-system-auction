@@ -8760,13 +8760,18 @@ button.custom-button {
  Tela de Listar Produtos Anunciados
 */
 .space-table-left {
-    padding-left: 10px !important;
-    border-left: 1px solid silver;
-    padding-right: 10px !important;
+
+    padding: 5px !important;
+    border-bottom: 1px solid silver !important;
+    border-top: 1px solid silver !important;
+
 }
 .space-table-top {
     border-bottom: 1px solid silver;
     border-top: 1px solid silver;
+    border-right: 1px solid silver;
+    border-left: 1px solid silver;
+    padding-left: 5px;
 }
 
 .small{
@@ -8777,4 +8782,48 @@ button.custom-button {
 }
 .small-blue {
     color: #007ec3 !important;
+}
+
+.margin-top-btn-search{
+    margin-top: 10px;
+}
+
+.btn-modal-image{
+    width: 141px;
+    font-size: 15px;
+}
+.box-images-edit{
+    margin-top: 20px;
+}
+
+.btn-attributes {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    font-size: 12px;
+}
+
+.btn-attributes-add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.input-attributes-add{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.img-mini {
+    width: 300px;
+    height: auto;
+    cursor: pointer;
+}
+
+.txt-excluir-attr{
+    padding-top: 4px;
+    float: right;
+}
+.add-icon-circle{
+    margin-top: 1px;
+    float: left;
 }
