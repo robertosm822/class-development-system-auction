@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Annoucement;
 use App\Models\AnnouncementAttribute;
+use App\Models\Auction;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Seller;
@@ -17,10 +18,66 @@ class AnnoucementsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Inicializa a query base
+        $query = Annoucement::query();
+
+        // Filtra por current_price (min e max)
+        if ($request->has('min_price') && $request->has('max_price')) {
+            $query->whereBetween('current_price', [
+                $request->input('min_price'),
+                $request->input('max_price')
+            ]);
+        } elseif ($request->has('min_price')) {
+            $query->where('current_price', '>=', $request->input('min_price'));
+        } elseif ($request->has('max_price')) {
+            $query->where('current_price', '<=', $request->input('max_price'));
+        }
+
+        // Filtra por title (busca parcial)
+        if ($request->has('title')) {
+            $query->where('title', 'like', '%' . $request->input('title') . '%');
+        }
+
+        // Filtra por description (busca parcial)
+        if ($request->has('description')) {
+            $query->where('description', 'like', '%' . $request->input('description') . '%');
+        }
+
+        // Carrega os anúncios com as imagens relacionadas
+        /** @var \Illuminate\Pagination\LengthAwarePaginator $announcements */
+        $announcements = $query->with(['images'])->paginate(20);
+
+        /** @var \Illuminate\Support\Collection $items */
+        // Transforma os dados para incluir apenas a primeira imagem
+        $formattedAnnouncements = $announcements->map(function ($announcement) {
+            return [
+                'id' => $announcement->id,
+                'seller_id' => $announcement->seller_id,
+                'category_id' => $announcement->category_id,
+                'title' => $announcement->title,
+                'current_price' => $announcement->current_price,
+                'description' => $announcement->description,
+                'date_started' => $announcement->date_started,
+                'date_expiration' => $announcement->date_expiration,
+                'status' => $announcement->status,
+                'first_image' => $announcement->images->first() ? $announcement->images->first()->url_archive : '/uploads/no-image-icon.png', // Primeira imagem
+            ];
+        });
+
+        // Retorna os resultados formatados como JSON
+        return response()->json([
+            'data' => $formattedAnnouncements,
+            'meta' => [
+                'current_page' => $announcements->currentPage(),
+                'last_page' => $announcements->lastPage(),
+                'per_page' => $announcements->perPage(),
+                'total' => $announcements->total(),
+            ],
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,11 +111,12 @@ class AnnoucementsController extends Controller
     public function addForm(Request $request)
     {
         $products = Annoucement::all();
+        $user = Auth::user();
         $search = $request->input('search');
 
         $products = Annoucement::when($search, function ($query, $search) {
             return $query->where('title', 'like', "%{$search}%");
-        })->orderBy('date_started', 'desc')->paginate(10);
+        })->where('seller_id',$user->id)->orderBy('date_started', 'desc')->paginate(10);
 
         return view('admin.produtos-gerenciar', compact('products', 'search'));
     }
@@ -81,7 +139,8 @@ class AnnoucementsController extends Controller
     public function edit($id)
     {
         // Encontrar o produto pelo ID
-        $product = Annoucement::findOrFail($id);
+        $user = Auth::user();
+        $product = Annoucement::where('seller_id',$user->id)->findOrFail($id);
 
         // Obter todas as categorias para preencher o campo select
         $categories = Category::all();
@@ -89,8 +148,16 @@ class AnnoucementsController extends Controller
         // Obter todas as imagens associadas ao anúncio
         $images = Image::where('announcement_id', $id)->get();
 
+        // Busca um leilão existente com o mesmo annoucement_id
+        $auction = Auction::where('annoucement_id', $id)->first();
+        $auction = [
+            'auction_start' => (!is_null($auction))? $auction->auction_start: "",
+            'auction_end' => (!is_null($auction))? $auction->auction_end: "",
+            'status_auction' => (!is_null($auction))? $auction->status_auction: "",
+        ];
+
         // Retornar a view com o produto encontrado
-        return view('admin.announcements.edit',  compact('product', 'categories', 'images'));
+        return view('admin.announcements.edit',  compact('product', 'categories', 'images', 'auction'));
     }
 
     public function update(Request $request, $id)
@@ -166,7 +233,8 @@ class AnnoucementsController extends Controller
 
     public function destroy($id)
     {
-        $announcement = Annoucement::findOrFail($id);
+        $user = Auth::user();
+        $announcement = Annoucement::where('seller_id',$user->id)->findOrFail($id);
 
         // Deletar imagens relacionadas antes de excluir o anúncio
         $announcement->images()->delete();

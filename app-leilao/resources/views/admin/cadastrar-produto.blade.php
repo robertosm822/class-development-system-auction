@@ -21,6 +21,28 @@
     .h4-arquivos {
         font-size: 16px;
     }
+    /*
+        Alert Bootstrap fake
+    */
+    .alert-danger {
+        padding: 1rem; /* Espaçamento interno */
+        margin-bottom: 1rem; /* Espaçamento externo na parte inferior */
+        border: 1px solid #f5c6cb; /* Cor da borda */
+        border-radius: 0.25rem; /* Borda arredondada */
+        background-color: #f8d7da; /* Cor de fundo */
+        color: #721c24; /* Cor do texto */
+    }
+    .alert-danger .close {
+        background: transparent;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        color: #721c24;
+        float: right;
+        padding-bottom: 26px;
+        padding-left: 12px;
+    }
+
 </style>
 <div class="cart-sidebar-area">
 
@@ -126,6 +148,15 @@
                                     {{ Session::get('success') }}
                                 </div>
                             @endif
+
+                            @if ($errors->any())
+
+                                <div class="alert-danger">
+                                    <button class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+                                    ⚠️ <strong>Atenção!</strong> {{ $errors->first() }}
+                                  </div>
+                            @endif
+
                             @if(Session::get('errorUpdate'))
                                 <div class="alert alert-danger">
                                     {{ Session::get('errorUpdate') }}
@@ -236,8 +267,8 @@
 
                                                         <div class="attribute-row">
                                                             <input type="text" name="attributes[${index}][name]" class="form-control input-attributes-add" placeholder="Nome do atributo" required>
-                    <input type="text" name="attributes[${index}][value]" class="form-control input-attributes-add" placeholder="Valor do atributo" required>
-                    <button type="button" class="btn-attributes btn btn-danger remove-attribute"><i class="small material-icons small-white">delete_chart</i> <div class="txt-excluir-attr">Excluir</div></button>
+                                                                <input type="text" name="attributes[${index}][value]" class="form-control input-attributes-add" placeholder="Valor do atributo" required>
+                                                                <button type="button" class="btn-attributes btn btn-danger remove-attribute"><i class="small material-icons small-white">delete_chart</i> <div class="txt-excluir-attr">Excluir</div></button>
                                                         </div>
 
                                                 </div>
@@ -259,7 +290,7 @@
                                         </li>
                                         <li>
 
-                                                <button class="btn-info" style="margin-top: 20px;">CADASTRAR</button>
+                                                <button type="submit" class="btn-info" style="margin-top: 20px;">CADASTRAR</button>
 
                                         </li>
                                     </ul>
@@ -288,6 +319,30 @@ setTimeout(() => {
         }
     });
 }, 1000);
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const attributesContainer = document.getElementById("attributes-container");
+    const addAttributeBtn = document.getElementById("add-attribute");
+
+    addAttributeBtn.addEventListener("click", function () {
+        const index = attributesContainer.children.length;
+        const attributeRow = document.createElement("div");
+        attributeRow.classList.add("attribute-row");
+        attributeRow.innerHTML = `
+            <input type="text" name="attributes[${index}][name]" class="form-control input-attributes-add" placeholder="Nome do atributo" required>
+            <input type="text" name="attributes[${index}][value]" class="form-control input-attributes-add" placeholder="Valor do atributo" required>
+            <button type="button" class="btn-attributes btn btn-danger remove-attribute"><i class="small material-icons small-white">delete_chart</i> <div class="txt-excluir-attr">Excluir</div></button>
+        `;
+        attributesContainer.appendChild(attributeRow);
+    });
+
+    attributesContainer.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-attribute")) {
+            event.target.parentElement.remove();
+        }
+    });
+});
 
 
 </script>

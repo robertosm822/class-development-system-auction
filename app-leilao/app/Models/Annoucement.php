@@ -45,4 +45,9 @@ class Annoucement extends Model
     {
         return $this->hasMany(AnnouncementAttribute::class,'announcement_id', 'id' );
     }
+
+    public function bids()
+    {
+        return $this->hasMany(bid::class,'announcement_id', 'id' );
+    }
 }

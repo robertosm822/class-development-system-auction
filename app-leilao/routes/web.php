@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AnnoucementsController;
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\BackEndController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\ImagesController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,11 @@ Route::get('/',[FrontEndController::class,'index']);
 Route::get('/registrar-se', [FrontEndController::class, 'create'])->name('registrar-se');
 Route::post('/register-user',[FrontEndController::class, 'storeUser'])->name('register-user');
 
+Route::get('/listar-produtos', function (){
+    return view('frontend.listagem-principal');
+}); //exemplo de tela incial
+
+
 Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function () {
 
     Route::get('/',[ BackEndController::class,'index'])->name('admin');
@@ -50,6 +57,14 @@ Route::prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function
 
     //deletar imagem pelo Modal em Editar
     Route::delete('/images/{id}', [ImagesController::class, 'destroy'])->name('images.destroy');
+
+    //ativar venda por leilao
+    Route::post('/auction/store', [AuctionController::class, 'store'])->name('auction.store');
+
+    /**
+     * Tela de Leilao online
+    */
+    Route::get('/leilao-online/{auctionId}', [AuctionController::class,'showAuction']);
 
 });
 

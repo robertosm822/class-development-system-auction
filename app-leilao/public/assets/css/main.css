@@ -8827,3 +8827,26 @@ button.custom-button {
     margin-top: 1px;
     float: left;
 }
+
+/**
+    Layout da tela de leilao real time
+*/
+/* Cor para o lance do usuário logado */
+.user-bid {
+    background-color: #d4edda; /* Verde claro */
+    border-left: 5px solid #28a745; /* Verde escuro */
+}
+
+/* Cor para os lances de outros usuários */
+.other-bid {
+    background-color: #fff3cd; /* Amarelo claro */
+    border-left: 5px solid #ffa500; /* Laranja */
+}
+
+/* Ajustes gerais */
+.bid-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}

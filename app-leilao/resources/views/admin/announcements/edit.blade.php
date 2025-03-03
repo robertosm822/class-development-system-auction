@@ -1,5 +1,22 @@
 <x-layout-front title="Gerenciar Produtos">
+    <style scoped>
+        .custom-close-btn {
+            width: 20px; /* Ajusta o tamanho */
+            height: 20px;
+            background-color: transparent; /* Mantém fundo transparente */
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0.8;
+        }
 
+        .custom-close-btn:hover {
+            opacity: 1;
+            transform: scale(1.1); /* Efeito de leve aumento ao passar o mouse */
+        }
+
+    </style>
     <!--============= BreadCamps Section Starts Here =============-->
     <div class="hero-section style-2 pb-lg-400">
         <div class="container">
@@ -8,10 +25,10 @@
                     <a href="{{url('/')}}">Home</a>
                 </li>
                 <li>
-                    <a href="#0">Admin</a>
+                    <a href="/admin/">Admin</a>
                 </li>
                 <li>
-                    <span>Gerenciar Produtos</span>
+                    <span>Editar Produtos</span>
                 </li>
             </ul>
         </div>
@@ -24,7 +41,31 @@
     <section class="dashboard-section padding-bottom mt--240 mt-lg--325 pos-rel">
         <div class="container">
             <div class="row justify-content-center">
+                <div class="dashboard-widget" style="width: 83%; margin-bottom:10px">
+                    <div class="dashboard-purchasing-tabs">
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 10px; float: right;">
+                                    <a href="/admin/list-products"  style="float: right;">
+                                        <svg fill="#5e3dff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" style="width: 25px;" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 46.032 46.033" xml:space="preserve" stroke="#5e3dff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M8.532,18.531l8.955-8.999c-0.244-0.736-0.798-1.348-1.54-1.653c-1.01-0.418-2.177-0.185-2.95,0.591L1.047,20.479 c-1.396,1.402-1.396,3.67,0,5.073l11.949,12.01c0.771,0.775,1.941,1.01,2.951,0.592c0.742-0.307,1.295-0.918,1.54-1.652l-8.956-9 C6.07,25.027,6.071,21.003,8.532,18.531z"></path> <path d="M45.973,31.64c-1.396-5.957-5.771-14.256-18.906-16.01v-5.252c0-1.095-0.664-2.082-1.676-2.5 c-0.334-0.138-0.686-0.205-1.033-0.205c-0.705,0-1.398,0.276-1.917,0.796L10.49,20.479c-1.396,1.402-1.396,3.669-0.001,5.073 l11.95,12.009c0.517,0.521,1.212,0.797,1.92,0.797c0.347,0,0.697-0.066,1.031-0.205c1.012-0.418,1.676-1.404,1.676-2.5V30.57 c4.494,0.004,10.963,0.596,15.564,3.463c0.361,0.225,0.77,0.336,1.176,0.336c0.457,0,0.91-0.139,1.297-0.416 C45.836,33.429,46.18,32.515,45.973,31.64z"></path> </g> </g> </g></svg>
+                                        Voltar
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="padding: 10px">
 
+                                        <b>Venda por leilão:</b> {{($auction['status_auction'] === "active")? "Ativo" : "Inativo"}}
+                                        <br>
+
+                                </div>
+                            </div>
+
+
+                            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#auctionModal">Ativar Venda por Leilão</button>
+                        </div>
+                    </div>
+                </div>
                 <!--INICIO DO CONTEUDO DA TELA -->
                 <div class="dashboard-widget" style="width: 83%;">
 
@@ -153,6 +194,51 @@
         </div>
         </div>
     </section>
+
+    <!-- MODAL DE ATIVAR VENDA POR LEILAO -->
+    <div class="modal fade" id="auctionModal" tabindex="-1" aria-labelledby="auctionModalLabel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="auctionModalLabel" aria-hidden="true">>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="auctionModalLabel">Ativar Venda Por Leilão</h5>
+                    <button type="button" class="btn-close custom-close-btn" data-bs-dismiss="modal" aria-label="Close">x</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulário -->
+                    <form action="{{ route('auction.store') }}" method="POST">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="auction_name" class="form-label">Nome do Leilão</label>
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <input type="text" class="form-control" id="auction_name" name="auction_name" value="{{$product->title}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="auction_start" class="form-label">Início do Leilão</label>
+                            <input type="datetime-local" class="form-control" id="auction_start" name="auction_start" value="{{$auction['auction_start']}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="auction_end" class="form-label">Fim do Leilão</label>
+                            <input type="datetime-local" class="form-control" id="auction_end" name="auction_end" value="{{$auction['auction_end']}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Status" class="form-label">Status</label>
+                            <select name="status_auction" id="status_auction" class="form-control">
+                                <option value="active" {{($auction['status_auction'] === "active")? "selected": ""}}>Ativo</option>
+                                <option value="inactive" {{($auction['status_auction'] === "inactive")? "selected": ""}}>Inativo</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Salvar Leilão</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--============= Dashboard Section Ends Here =============-->
     <!-- Modal de Visualização e Exclusão de Imagem -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">

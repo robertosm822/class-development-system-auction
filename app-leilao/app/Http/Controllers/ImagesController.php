@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ImagesController extends Controller
 {
@@ -42,7 +43,7 @@ class ImagesController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'files' => 'required',
             'files.*' => 'required|mimes:jpg,jpeg,JPEG,gif,png,PNG|max:2048',
             'title' => 'required|string|max:255',
@@ -56,6 +57,13 @@ class ImagesController extends Controller
             'attributes.*.value' => 'required|string|max:255',
         ]);
         $data = $request->all();
+
+        if ($validator->fails()) {
+            return redirect('admin/cadastrar-produto')
+                ->withErrors($validator)
+                ->withInput(); // Opcional: mantém os dados do formulário preenchidos
+        }
+
         try {
             DB::beginTransaction();
 
@@ -111,12 +119,13 @@ class ImagesController extends Controller
 
             DB::commit();
             $success = 'Cadastrado produto e imagens com sucesso!';
+
             return redirect('admin/cadastrar-produto')->with('success',$success);
         } catch (Exception $e) {
             DB::rollback();
 
             $errorCad = 'Ops. Algo deu errado em seu cadastro, tente novamente ou contate o suporte. '.$e->getMessage();
-            dd($errorCad );
+
             return redirect('admin/cadastrar-produto')->with('errorCad',$errorCad);
         }
 

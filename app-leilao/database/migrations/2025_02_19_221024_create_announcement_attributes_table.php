@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('announcement_attributes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('announcement_id')
-                ->constrained('announcements') // Faz referência à tabela announcements
-                ->onDelete('cascade'); // Exclui os atributos se o anúncio for deletado
+                ->constrained('announcements')
+                ->onDelete('cascade');
             $table->string('attribute_name'); // Nome do atributo (ex: "Tamanho", "Cor", "Material")
             $table->string('attribute_value'); // Valor do atributo (ex: "42", "Azul", "Algodão")
             $table->timestamps();
