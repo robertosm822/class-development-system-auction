@@ -199,4 +199,8 @@ I have created the _Controller_ to control these _views_ let's go in the folder 
 Inside the `resources/views/` folder, we will create a new folder named `frontend` where we will place everything that will be publicly displayed on the institutional website of the system. Inside this `resources/views/frontend` folder we will create our first Blade template engine file, named `home.blade.php`
 
 
+## Created Seed for Categories default
 
+```bash
+   php artisan db:seed --class=CategorySeeder
+```

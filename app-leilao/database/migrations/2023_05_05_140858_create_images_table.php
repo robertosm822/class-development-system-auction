@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("announcement_id");
-            $table->string("name_archive", 120);
+            $table->string("name_archive", 120)->nullable();
             $table->string("url_archive", 250);
             $table->timestamps();
-            $table->foreign('announcement_id')->references('id')->on('annoucements');
+            $table->foreign('announcement_id')->references('id')->on('annoucements')->onDelete('cascade');
         });
     }
 
