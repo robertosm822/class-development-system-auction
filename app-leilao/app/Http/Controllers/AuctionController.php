@@ -19,6 +19,11 @@ class AuctionController extends Controller
             $userOnline = Auth::user();
            //verificar se este leilao esta ativo ou inativo
         } catch (\Exception $e) {
+            /**
+             * @param  array|string|null  $key
+             * @param  mixed  $default
+             * @return mixed|\Illuminate\Session\Store|\Illuminate\Session\SessionManager
+             */
             session()->flash('error', 'Erro ao iniciar o leilão: ' . $e->getMessage());
         }
 
