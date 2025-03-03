@@ -8755,3 +8755,98 @@ button.custom-button {
 }
 
 /*All Animation Ends Here*/
+
+/**
+ Tela de Listar Produtos Anunciados
+*/
+.space-table-left {
+
+    padding: 5px !important;
+    border-bottom: 1px solid silver !important;
+    border-top: 1px solid silver !important;
+
+}
+.space-table-top {
+    border-bottom: 1px solid silver;
+    border-top: 1px solid silver;
+    border-right: 1px solid silver;
+    border-left: 1px solid silver;
+    padding-left: 5px;
+}
+
+.small{
+    width: 25px !important;
+}
+.small-red {
+    color: #e73351 !important;
+}
+.small-blue {
+    color: #007ec3 !important;
+}
+
+.margin-top-btn-search{
+    margin-top: 10px;
+}
+
+.btn-modal-image{
+    width: 141px;
+    font-size: 15px;
+}
+.box-images-edit{
+    margin-top: 20px;
+}
+
+.btn-attributes {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    font-size: 12px;
+}
+
+.btn-attributes-add {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+.input-attributes-add{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.img-mini {
+    width: 300px;
+    height: auto;
+    cursor: pointer;
+}
+
+.txt-excluir-attr{
+    padding-top: 4px;
+    float: right;
+}
+.add-icon-circle{
+    margin-top: 1px;
+    float: left;
+}
+
+/**
+    Layout da tela de leilao real time
+*/
+/* Cor para o lance do usuário logado */
+.user-bid {
+    background-color: #d4edda; /* Verde claro */
+    border-left: 5px solid #28a745; /* Verde escuro */
+}
+
+/* Cor para os lances de outros usuários */
+.other-bid {
+    background-color: #fff3cd; /* Amarelo claro */
+    border-left: 5px solid #ffa500; /* Laranja */
+}
+
+/* Ajustes gerais */
+.bid-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+}

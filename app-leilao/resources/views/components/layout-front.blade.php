@@ -8,17 +8,18 @@
 
     <title>{{ $title }} - Leilões Online</title>
 
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.css">
-    <link rel="stylesheet" href="./assets/css/nice-select.css">
-    <link rel="stylesheet" href="./assets/css/owl.min.css">
-    <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./assets/css/flaticon.css">
-    <link rel="stylesheet" href="./assets/js/jquery-ui2.min.js">
-    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="{{asset('assets/css/nice-select.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/owl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/js/jquery-ui2.min.js')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
 
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -56,12 +57,26 @@
                         </li>
                         -->
                     </ul>
-                    <ul class="cart-button-area">
+                    @guest
+                        <ul class="cart-button-area">
 
-                        <li>
-                            <a href="entrar.php" class="user-button"><i class="flaticon-user"></i></a>
-                        </li>
-                    </ul>
+                            <li>
+                                <a title="Entrar" href="{{ route('login') }}"  class="user-button"><i class="flaticon-user"></i> </a>
+                            </li>
+                        </ul>
+                    @else
+                        <ul class="cart-button-area">
+
+                            <li>
+                                
+                                <a title="Sair" href="{{ route('logout') }}"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="user-button"><i class="flaticon-user"></i> </a>
+                        
+                            </li>
+                        </ul>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -70,7 +85,7 @@
                 <div class="header-wrapper">
                     <div class="logo">
                         <a href="{{url('/')}}">
-                            <img src="./assets/images/logo/logo.png" alt="logo">
+                            <img src="{{asset('assets/images/logo/logo.png')}}" alt="logo">
                         </a>
                     </div>
                     <ul class="menu ml-auto">
@@ -154,16 +169,16 @@
     {{ $slot }}
 
     <!--============= Footer Section Starts Here =============-->
-    <footer class="bg_img padding-top oh" data-background="./assets/images/footer/footer-bg.jpg">
+    <footer class="bg_img padding-top oh" data-background="{{asset('assets/images/footer/footer-bg.jpg')}}">
         <div class="footer-top-shape">
-            <img src="./assets/css/img/footer-top-shape.png" alt="css">
+            <img src="{{asset('assets/css/img/footer-top-shape.png')}}" alt="css">
         </div>
 
         <div class="newslater-wrapper">
             <div class="container">
                 <div class="newslater-area">
                     <div class="newslater-thumb">
-                        <img src="./assets/images/footer/newslater.png" alt="footer">
+                        <img src="{{asset('assets/images/footer/newslater.png')}}" alt="footer">
                     </div>
                     <div class="newslater-content">
                         <div class="section-header left-style mb-low">
@@ -222,20 +237,20 @@
                 <div class="copyright-area">
                     <div class="footer-bottom-wrapper">
                         <div class="logo">
-                            <a href="index.php"><img src="./assets/images/logo/footer-logo.png" alt="logo"></a>
+                            <a href="index.php"><img src="{{asset('assets/images/logo/footer-logo.png')}}" alt="logo"></a>
                         </div>
                         <ul class="gateway-area">
                             <li>
-                                <a href="#0"><img src="./assets/images/footer/paypal.png" alt="footer"></a>
+                                <a href="#0"><img src="{{asset('assets/images/footer/paypal.png')}}" alt="footer"></a>
                             </li>
                             <li>
-                                <a href="#0"><img src="./assets/images/footer/visa.png" alt="footer"></a>
+                                <a href="#0"><img src="{{asset('assets/images/footer/visa.png')}}" alt="footer"></a>
                             </li>
                             <li>
-                                <a href="#0"><img src="./assets/images/footer/discover.png" alt="footer"></a>
+                                <a href="#0"><img src="{{asset('assets/images/footer/discover.png')}}" alt="footer"></a>
                             </li>
                             <li>
-                                <a href="#0"><img src="./assets/images/footer/mastercard.png" alt="footer"></a>
+                                <a href="#0"><img src="{{asset('assets/images/footer/mastercard.png')}}" alt="footer"></a>
                             </li>
                         </ul>
                         <div class="copyright"><p>&copy; Copyright 2023 | <a href="#0">LELOU</a> By <a href="https://api.whatsapp.com/send?phone=5521981988134" target="_blank">Roberto S. Melo</a></p></div>
@@ -246,20 +261,20 @@
     </footer>
     <!--============= Footer Section Ends Here =============-->
 
-    <script src="./assets/js/jquery-3.3.1.min.js"></script>
-    <script src="./assets/js/modernizr-3.6.0.min.js"></script>
-    <script src="./assets/js/plugins.js"></script>
+    <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('assets/js/modernizr-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js"></script>
-    <script src="./assets/js/isotope.pkgd.min.js"></script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/waypoints.js"></script>
-    <script src="./assets/js/nice-select.js"></script>
-    <script src="./assets/js/counterup.min.js"></script>
-    <script src="./assets/js/owl.min.js"></script>
-    <script src="./assets/js/magnific-popup.min.js"></script>
-    <script src="assets/js/yscountdown.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{asset('assets/js/wow.min.js')}}"></script>
+    <script src="{{asset('assets/js/waypoints.js')}}"></script>
+    <script src="{{asset('assets/js/nice-select.js')}}"></script>
+    <script src="{{asset('assets/js/counterup.min.js')}}"></script>
+    <script src="{{asset('assets/js/owl.min.js')}}"></script>
+    <script src="{{asset('assets/js/magnific-popup.min.js')}}"></script>
+    <script src="{{asset('assets/js/yscountdown.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('assets/js/main.js')}}"></script>
 </body>
 
 </html>
